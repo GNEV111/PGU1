@@ -1,0 +1,137 @@
+/* Сброс стилей по умолчанию */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Основные стили для body */
+body {
+    font-family: Golos;
+    line-height: 1.6;
+    background: white;
+    color: #000000;
+    margin: 0; /* Убираем отступы по умолчанию */
+    overflow-x: hidden; /* Скрываем горизонтальную прокрутку */
+    
+}
+
+/* Стили для заголовка */
+header {
+    background: #ffffff;
+    color: #1a1a1a;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Настройка тени */
+    
+}
+
+header h1 {
+    margin-bottom: 10px;
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 220px;
+}
+
+nav ul li a {
+    color: #000000;
+    text-decoration: none;
+}
+
+/* Стили для секций */
+section {
+    width: 100px; /* Ширина секции */
+    height: 100px; /* Высота секции */
+    padding: 50px; /* Внутренние отступы */
+    margin: 20px 90px 90px; /* Уменьшите верхний отступ до 20px */
+}
+
+
+
+h2 {
+    margin-bottom: 15px;
+    color: #35424a;
+}
+
+/* Стили для формы */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+button {
+    padding: 10px;
+    background: #35424a;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #2c3e50;
+}
+
+/* Стили для футера */
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background: #35424a;
+    color: #ffffff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.logo {
+    display: inline-block; /* Позволяет устанавливать размеры и отступы */
+    margin: 20px; /* Отступы вокруг логотипа */
+    text-decoration: none; /* Убирает подчеркивание у ссылки */
+}
+
+.logo img {
+    width: 120px; /* Увеличенная ширина логотипа */
+    height: auto; /* Автоматическая высота для сохранения пропорций */
+    border-radius: 5px; /* Скругление углов изображения */
+    transition: transform 0.3s; /* Плавный переход для эффекта при наведении */
+}
+
+.logo:hover img {
+    transform: scale(1.4); /* Увеличение логотипа при наведении */
+}
+
+.text1 {
+    position: relative; /* Устанавливаем относительное позиционирование */
+    left: 340px;       /* Сдвигаем текст вправо на 500 пикселей */
+    top: 160px;         /* Сдвигаем текст вниз на 20 пикселей */
+    font-size: 24px;   /* Увеличиваем размер шрифта для наглядности */
+    color: black;      /* Цвет текста */
+}
+
+
+
+/* СОЗДАНИЕ ХТМЛ */
+
+
+.gun {
+    text-align: center;
+}

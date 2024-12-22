@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Продажа</title>
+    <link rel="stylesheet" href="main.css"> <!-- Подключение CSS файла -->
+    <style>
+        body {
+    font-family: Golos;
+    line-height: 1.6;
+    background: white;
+    color: #000000;
+    margin: 0; /* Убираем отступы по умолчанию */
+    overflow-x: hidden; /* Скрываем горизонтальную прокрутку */
+    
+}
+        header {
+        background: #ffffff;
+        color: #1a1a1a;
+        padding: 20px 0;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Настройка тени */
+    
+        }
+        #chat {
+            border: 1px solid #ccc;
+            border-radius: 18px; /* Скругление углов */
+            padding: 15px;
+            height: 500px;
+            width: 1200px;
+            margin-left: 230px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            background-color: #ffffff; /* Белый фон для чата */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Тень для чата */
+        }
+        .user-message {
+            color: blue;
+            background-color: #e7f3ff; /* Светло-синий фон для сообщений пользователя */
+            border-radius: 15px; /* Скругление углов */
+            padding: 10px; /* Отступы внутри сообщения */
+            margin: 5px 0; /* Отступы между сообщениями */
+            max-width: 50%; /* Максимальная ширина сообщения */
+            align-self: flex-end; /* Выравнивание сообщения пользователя вправо */
+        }
+        .gpt-message {
+            color: green;
+            background-color: #d4edda; /* Светло-зеленый фон для сообщений GPT */
+            border-radius: 15px; /* Скругление углов */
+            padding: 10px; /* Отступы внутри сообщения */
+            margin: 5px 0; /* Отступы между сообщениями */
+            max-width: 50%; /* Максимальная ширина сообщения */
+        }
+        form {
+            display: flex; /* Использование flexbox для формы */
+            justify-content: space-between; /* Выравнивание элементов формы */
+        }
+        input[type="text"] {
+            width: 1200px; /* Ширина текстового поля */
+            padding: 10px; /* Отступы внутри текстового поля */
+            border: 1px solid #ccc; /* Граница текстового поля */
+            border-radius: 15px; /* Скругление углов текстового поля */
+            margin-right: 10px; /* Отступ справа от текстового поля */
+            margin-left: 230px;
+        }
+        input[type="submit"] {
+            margin-right: 10px; /* Отступ справа от текстового поля */
+            margin-left: 230px;
+            width: 1200px; /* Ширина текстового поля */
+            padding: 10px;
+            padding: 10px 15px; /* Отступы внутри кнопки */
+            border: none; /* Убираем границу */
+            border-radius: 15px; /* Скругление углов кнопки */
+            background-color: #2c2c2c; /* Цвет фона кнопки */
+            color: white; /* Цвет текста кнопки */
+            cursor: pointer; /* Курсор при наведении на кнопку */
+            transition: background-color 0.3s; /* Плавный переход цвета фона */
+        }
+        input[type="submit"]:hover {
+            background-color: #1b1b1b; /* Цвет фона кнопки при наведении */
+        }
+        footer {
+            text-align: center; /* Выравнивание текста внизу страницы */
+            margin-top: 20px; /* Отступ сверху для футера */
+            color: #ffffff; /* Цвет текста футера */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="main.html">КОНСТРУКТОР</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h1 class="gun">НАПИСАНИЕ КОДА</h1>
+    <div id="chat"></div>
+    <form id="chat-form">
+        <input type="text" id="user-input" placeholder="Введите ваше сообщение" required>
+        <input type="submit" value="Отправить">
+    </form>
+
+    <footer>
+        <p>&copy; 2024 Лабораторные Работы. Все права защищены.</p>
+    </footer>
+
+    <script>
+        const chatDiv = document.getElementById('chat');
+        const form = document.getElementById('chat-form');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const userInput = document.getElementById('user-input').value;
+            chatDiv.innerHTML += `<div class="user-message">Вы: ${userInput}</div>`;
+            document.getElementById('user-input').value = '';
+
+            const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer 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' // Замените YOUR_API_KEY на ваш ключ API
+                },
+                body: JSON.stringify({
+                    model: 'gpt-4o', // Укажите нужную модель
+                    messages: [{ role: 'user', content: userInput }]
+                })
+            });
+
+            const data = await response.json();
+            const gptMessage = data.choices[0].message.content;
+            chatDiv.innerHTML += `<div class="gpt-message">GPT: ${gptMessage}</div>`;
+            chatDiv.scrollTop = chatDiv.scrollHeight; // Прокрутка вниз
+        });
+    </script>
+</body>
+</html>
